@@ -17,8 +17,34 @@ class Character {
 
 class Player extends Character {
     constructor(){
-        super(); 
+        super(5); 
     }
+}
+
+class Npc extends Character {
+    constructor(){
+        super(5);
+    }
+}
+
+function getPlayerChoice(){
+    return {
+        hand: "gu",
+        action: "attack"
+    };
+}
+
+function getNpcChoice(){
+    const hands = ["gu", "choki", "pa"];
+    const actions = ["attack", "defense"];
+
+    let hand = hands[Math.floor(Math.random() * hands.length)];
+    let action = actions[Math.floor(Math.random() * actions.length)];
+
+    return {
+        hand: hand, 
+        action: action
+    };
 }
 
 function judgeJanken(playerHand, npcHand){
@@ -36,6 +62,12 @@ function judgeJanken(playerHand, npcHand){
     }
 }
 console.log(judgeJanken("gu", "pa"));
+
+function reverseResult(result){
+    if(result === "win") return "lose";
+    if(result === "lose") return "win";
+    return "draw"
+}
 
 function setScore(character, result) {
     character.attackScore = 0;
@@ -74,16 +106,36 @@ function setScore(character, result) {
     }
 }
 
-    function applyDamage(player,npc) {
-        let playerDamage = npc.attackScore - player.defenseScore;
-        if(playerDamage < 0) playerDamage = 0;
+function applyDamage(player,npc) {
+    let playerDamage = npc.attackScore - player.defenseScore;
+    if(playerDamage < 0) playerDamage = 0;
 
-        let npcDamage = player.attackScore - npc.defenseScore;
-        if(npcDamage < 0) npcDamage = 0;
+    let npcDamage = player.attackScore - npc.defenseScore;
+    if(npcDamage < 0) npcDamage = 0;
 
-        player.life -= playerDamage;
-        if(player.life < 0) player.life = 0;
-        npc.life -= npcDamage;
-        if(npc.life < 0) npc.life = 0;
-}       
+    player.life -= playerDamage;
+    if(player.life < 0) player.life = 0;
+    npc.life -= npcDamage;
+    if(npc.life < 0) npc.life = 0;
+}    
+
+function playTurn (player, npc){
+    let playerChoice = getPlayerChoice();
+    player.hand = playerChoice.hand;
+    player.action = playerChoice.action;
+
+    let npcChoice = getNpcChoice();
+    npc.hand = npcChoice.hand;
+    npc.action = npcChoice.action;
+
+    let result = judgeJanken(player.hand, npc.hand);
+
+    setScore(player, result);
+    setScore(npc, reverseResult(result));
+
+    applyDamage(player,npc);
+
+
+}
+
 
