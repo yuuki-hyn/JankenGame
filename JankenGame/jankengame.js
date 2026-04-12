@@ -1,3 +1,4 @@
+/*クラス定義*/
 class Character {
     constructor(life){
         this.life = life;
@@ -136,6 +137,28 @@ function playTurn (player, npc){
     applyDamage(player,npc);
 
 
+}
+
+
+function runGame(){
+    let player = new Player();
+    let npc = new Npc();
+
+    let turn = 1;
+    const MAX_TURN = 10;
+
+
+    while (turn <= MAX_TURN) {
+        playTurn(player, npc);
+
+        if(player.life <= 0 || npc.life <= 0) break;
+        
+        turn++;
+    }   //試合の終了条件を満たすまでループ
+
+    if (player.life > npc.life) return "player";
+    if (player.life < npc.life) return "npc";
+    return "draw";
 }
 
 
