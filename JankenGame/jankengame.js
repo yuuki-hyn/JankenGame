@@ -72,7 +72,18 @@ function setScore(character, result) {
         character.defenseScore = 1;
         return;
     }
-
-    function applyDamage(player)
 }
+
+    function applyDamage(player,npc) {
+        let playerDamage = npc.attackScore - player.defenseScore;
+        if(playerDamage < 0) playerDamage = 0;
+
+        let npcDamage = player.attackScore - npc.defenseScore;
+        if(npcDamage < 0) npcDamage = 0;
+
+        player.life -= playerDamage;
+        if(player.life < 0) player.life = 0;
+        npc.life -= npcDamage;
+        if(npc.life < 0) npc.life = 0;
+}       
 
