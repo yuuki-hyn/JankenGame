@@ -36,15 +36,21 @@ button:hover {
     margin-bottom: 20px;
 }
 
-#next-button {
+#next-button,
+#restart-button {
     padding: 12px 20px;
     font-weight: bold;
 }
 
 #result-message,
-#choice-message {
+#choice-message,
+#final-message {
     padding: 12px;
     border: 1px solid #ccc;
     margin-bottom: 12px;
     min-height: 24px;
+}
+
+#final-message {
+    font-weight: bold;
 }

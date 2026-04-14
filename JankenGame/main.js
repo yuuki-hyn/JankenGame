@@ -107,11 +107,6 @@ function applyDamage(player, npc) {
 
     npc.life -= npcDamage;
     if (npc.life < 0) npc.life = 0;
-
-    return {
-        playerDamage,
-        npcDamage
-    };
 }
 
 function playTurn(player, npc) {
@@ -149,9 +144,11 @@ function initUI() {
     document.getElementById("hand-selection").style.display = "block";
     document.getElementById("action-selection").style.display = "none";
     document.getElementById("next-button").style.display = "none";
+    document.getElementById("restart-button").style.display = "none";
 
-    document.getElementById("result-message").textContent = "";
+    document.getElementById("result-message").textContent = "ここに結果が表示されます";
     document.getElementById("choice-message").textContent = "";
+    document.getElementById("final-message").textContent = "";
 }
 
 function setHand(hand) {
@@ -181,22 +178,35 @@ function nextTurn() {
     document.getElementById("npc-life").textContent = npc.life;
     document.getElementById("turn-count").textContent = turn;
 
-    document.getElementById("result-message").textContent = turnResult.result;
+    let resultText = "";
+    if (turnResult.result === "win") {
+        resultText = "このターンはプレイヤーの勝ち";
+    } else if (turnResult.result === "lose") {
+        resultText = "このターンはNPCの勝ち";
+    } else {
+        resultText = "このターンはあいこ";
+    }
+
+    document.getElementById("result-message").textContent = resultText;
     document.getElementById("choice-message").textContent =
-        `プレイヤー: ${player.hand} / ${player.action} | NPC: ${turnResult.npcHand} / ${turnResult.npcAction}`;
+        `プレイヤー: ${player.hand} / ${player.action}  NPC: ${turnResult.npcHand} / ${turnResult.npcAction}`;
 
     if (player.life <= 0 || npc.life <= 0 || turn >= MAX_TURN) {
         let finalMessage = "";
 
         if (player.life > npc.life) {
-            finalMessage = "プレイヤーの勝ち";
+            finalMessage = "ゲーム終了：プレイヤーの勝ち";
         } else if (player.life < npc.life) {
-            finalMessage = "NPCの勝ち";
+            finalMessage = "ゲーム終了：NPCの勝ち";
         } else {
-            finalMessage = "引き分け";
+            finalMessage = "ゲーム終了：引き分け";
         }
 
-        document.getElementById("result-message").textContent = finalMessage;
+        document.getElementById("final-message").textContent = finalMessage;
+        document.getElementById("hand-selection").style.display = "none";
+        document.getElementById("action-selection").style.display = "none";
+        document.getElementById("next-button").style.display = "none";
+        document.getElementById("restart-button").style.display = "block";
         return;
     }
 
@@ -207,6 +217,26 @@ function nextTurn() {
     document.getElementById("hand-selection").style.display = "block";
     document.getElementById("action-selection").style.display = "none";
     document.getElementById("next-button").style.display = "none";
+}
+
+function resetGame() {
+    player.life = 5;
+    player.hand = null;
+    player.action = null;
+    player.attackScore = 0;
+    player.defenseScore = 0;
+
+    npc.life = 5;
+    npc.hand = null;
+    npc.action = null;
+    npc.attackScore = 0;
+    npc.defenseScore = 0;
+
+    currentHand = null;
+    currentAction = null;
+    turn = 1;
+
+    initUI();
 }
 
 window.onload = initUI;
