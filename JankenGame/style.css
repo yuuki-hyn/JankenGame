@@ -1,0 +1,50 @@
+body {
+    font-family: sans-serif;
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 24px;
+    line-height: 1.6;
+}
+
+h1 {
+    margin-bottom: 24px;
+}
+
+h2 {
+    margin-top: 24px;
+    margin-bottom: 12px;
+}
+
+div {
+    margin-bottom: 16px;
+}
+
+button {
+    padding: 10px 16px;
+    margin-right: 8px;
+    margin-bottom: 8px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: 0.85;
+}
+
+#hand-selection,
+#action-selection {
+    margin-bottom: 20px;
+}
+
+#next-button {
+    padding: 12px 20px;
+    font-weight: bold;
+}
+
+#result-message,
+#choice-message {
+    padding: 12px;
+    border: 1px solid #ccc;
+    margin-bottom: 12px;
+    min-height: 24px;
+}

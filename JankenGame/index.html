@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>じゃんけんゲーム</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>じゃんけんゲーム</h1>
+
+    <h2>ステータス</h2>
+    <p>プレイヤーのライフ: <span id="player-life">5</span></p>
+    <p>NPCのライフ: <span id="npc-life">5</span></p>
+    <p>ターン数: <span id="turn-count">1</span></p>
+
+    <h2>手を選ぶ</h2>
+    <div id="hand-selection">
+        <button onclick="setHand('gu')">グー</button>
+        <button onclick="setHand('choki')">チョキ</button>
+        <button onclick="setHand('pa')">パー</button>
+    </div>
+
+    <h2>攻撃か防御を選ぶ</h2>
+    <div id="action-selection" style="display: none;">
+        <button onclick="setAction('attack')">攻撃</button>
+        <button onclick="setAction('defense')">防御</button>
+    </div>
+
+    <div>
+        <button id="next-button" onclick="nextTurn()" style="display: none;">
+            ターン実行
+        </button>
+    </div>
+
+    <h2>結果表示</h2>
+    <p id="result-message">ここに結果を表示する</p>
+    <p id="choice-message"></p>
+
+    <script src="main.js"></script>
+</body>
+</html>
