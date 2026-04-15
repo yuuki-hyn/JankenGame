@@ -226,7 +226,7 @@ function nextTurn() {
     document.getElementById("player-action-image").src = getActionImagePath(player.action);
     document.getElementById("npc-action-image").src = getActionImagePath(turnResult.npcAction);
 
-    じゃんけんの勝敗表示
+    // じゃんけんの勝敗表示
     let resultText = "";
     if (turnResult.result === "win") {
         resultText = "じゃんけんの勝敗：プレイヤーの勝ち";
