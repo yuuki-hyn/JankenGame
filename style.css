@@ -4,6 +4,7 @@ body {
     margin: 0 auto;
     padding: 24px;
     line-height: 1.6;
+    background:ivory;
 }
 
 h1 {
@@ -24,24 +25,34 @@ button {
     margin-right: 8px;
     margin-bottom: 8px;
     font-size: 16px;
+    font-weight: bold;
     cursor: pointer;
+    border-radius: 15px;
+    border: none;
+
 }
 
 button:hover {
     opacity: 0.85;
 }
 
+.section {
+    transition: 0.3s;
+}
 
 #hand-selection,
 #action-selection {
     margin-bottom: 20px;
+
 }
 
 #next-button,
 #next-round-button,
 #restart-button {
+    background-color:#FEEA00;
     padding: 12px 20px;
     font-weight: bold;
+    color:rgb(58, 56, 56);
 }
 
 #result-area {
@@ -52,9 +63,10 @@ button:hover {
 #damage-message,
 #final-message {
     padding: 12px;
-    border: 1px solid #ccc;
+    border: none;
     margin-bottom: 12px;
     min-height: 24px;
+
 }
 
 #final-message {
@@ -100,17 +112,20 @@ button:hover {
     min-width: 70px;
 }
 
+.result-character img[src=""] {
+    display: none;
+}
+
 .result-character img {
     width: 80px;
     height: 80px;
     object-fit: contain;
-    border: 1px solid #ccc;
-    padding: 8px;
+    border: none ;
+    padding: 0px ;
 }
 
 .action-icon {
     width: 40px !important;
     height: 40px !important;
     border: none !important;
-    padding: 0 !important;
 }

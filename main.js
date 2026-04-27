@@ -169,6 +169,11 @@ function initUI() {
     document.getElementById("npc-life").textContent = npc.life;
     document.getElementById("turn-count").textContent = turn;
 
+    // セクション
+    document.getElementById("hand-section").style.display = "block";
+    document.getElementById("action-section").style.display = "none";
+    document.getElementById("result-section").style.display = "none";
+
     // ボタン関係の表示
     document.getElementById("hand-selection").style.display = "block";
     document.getElementById("action-selection").style.display = "none";
@@ -191,6 +196,8 @@ function initUI() {
 function setHand(hand) {
     currentHand = hand;
 
+    document.getElementById("hand-section").style.display = "none";
+    document.getElementById("action-section").style.display = "block";
     document.getElementById("hand-selection").style.display = "none";
     document.getElementById("action-selection").style.display = "block";
 }
@@ -199,8 +206,15 @@ function setHand(hand) {
 function setAction(action) {
     currentAction = action;
 
+    document.getElementById("action-section").style.display = "none";
     document.getElementById("action-selection").style.display = "none";
     document.getElementById("next-button").style.display = "block";
+}
+
+function startGame() {
+    document.getElementById("title-screen").style.display = "none";
+    document.getElementById("game-screen").style.display = "block";
+    initUI();
 }
 
 // ターンを実行
@@ -216,6 +230,7 @@ function nextTurn() {
     const turnResult = playTurn(player, npc);
 
     //結果からステータスを更新
+    
     document.getElementById("player-life").textContent = player.life;
     document.getElementById("npc-life").textContent = npc.life;
     document.getElementById("turn-count").textContent = turn;
@@ -227,6 +242,8 @@ function nextTurn() {
     document.getElementById("npc-action-image").src = getActionImagePath(turnResult.npcAction);
 
     // じゃんけんの勝敗表示
+    document.getElementById("result-section").style.display = "block";
+
     let resultText = "";
     if (turnResult.result === "win") {
         resultText = "じゃんけんの勝敗：プレイヤーの勝ち";
@@ -276,6 +293,9 @@ function prepareNextTurn() {
     document.getElementById("action-selection").style.display = "none";
     document.getElementById("next-button").style.display = "none";
     document.getElementById("next-round-button").style.display = "none";
+
+    document.getElementById("result-section").style.display = "none";
+    document.getElementById("hand-section").style.display = "block";
 
     document.getElementById("player-result-image").src = "";
     document.getElementById("npc-result-image").src = "";
